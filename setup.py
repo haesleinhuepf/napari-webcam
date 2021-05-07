@@ -6,6 +6,9 @@ import codecs
 from setuptools import setup, find_packages
 
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 def read(fname):
     file_path = os.path.join(os.path.dirname(__file__), fname)
     return codecs.open(file_path, encoding='utf-8').read()
@@ -25,19 +28,19 @@ with open('requirements.txt') as f:
 use_scm = {"write_to": "napari_webcam/_version.py"}
 
 setup(
-    name='napari-webcam',
+    name='napari_webcam',
     author='Robert Haase',
     author_email='robert.haase@tu-dresden.de',
     license='BSD-3',
     url='https://github.com/haesleinhuepf/napari-webcam',
     description='Use your webcam from napari',
-    long_description=read('README.md'),
     long_description_content_type='text/markdown',
+    long_description=long_description,
     packages=find_packages(),
     python_requires='>=3.6',
     install_requires=requirements,
     #use_scm_version=use_scm,
-    version="0.1.2",
+    version="0.1.11",
     setup_requires=['setuptools_scm'],
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -54,7 +57,7 @@ setup(
     ],
     entry_points={
         'napari.plugin': [
-            'napari-webcam = napari_webcam',
+            'napari_webcam = napari_webcam',
         ],
     },
 )
