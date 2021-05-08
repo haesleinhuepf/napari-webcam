@@ -41,7 +41,7 @@ def acquire(camera_index=0, keep_connection=False, rgb=False, device : VideoCapt
         del acquire.video_source
 
     if rgb:
-        picture = np.swapaxes(picture, 0, 2)
+        picture[:,:,0], picture[:,:,2] = picture[:,:,2], picture[:,:,0]
     else:
         from skimage.color import rgb2gray
         picture = rgb2gray(picture)
@@ -51,15 +51,17 @@ def acquire(camera_index=0, keep_connection=False, rgb=False, device : VideoCapt
 @napari_hook_implementation
 def napari_experimental_provide_function():
     return [acquire_image]
-def acquire_image(camera_index: int = 0) -> LayerDataTuple:
+
+def acquire_image(camera_index: int = 0, rgb : bool = False) -> LayerDataTuple:
     """Acquire an image from a webcam"""
-    # , rgb : bool = False
-    rgb = False
 
-    picture = acquire(camera_index=camera_index)
+    picture = acquire(camera_index=camera_index, rgb=rgb)
 
-    if rgb:
-        from skimage.color import rgb2gray
-        picture = rgb2gray(picture)
+    #if rgb:
+    #    from skimage.color import rgb2gray
+    #    picture = rgb2gray(picture)
+
+    print("HELLO WORLD")
+    print(picture.shape)
 
     return (picture, {"rgb":rgb})

@@ -10,7 +10,7 @@ import time
 
 from napari._qt.qthreading import thread_worker
 from napari_plugin_engine import napari_hook_implementation
-from qtpy.QtWidgets import QWidget, QHBoxLayout, QPushButton, QLineEdit, QSpinBox, QCheckBox
+from qtpy.QtWidgets import QWidget, QHBoxLayout, QPushButton, QLineEdit, QSpinBox, QCheckBox, QGridLayout, QLabel
 from magicgui import magic_factory
 import cv2
 from ._function import acquire
@@ -27,10 +27,13 @@ class ContinuousAcquisition(QWidget):
 
         self.rgb_checkbox = QCheckBox()
 
-        self.setLayout(QHBoxLayout())
-        self.layout().addWidget(self.camera_index_spinner)
-        #self.layout().addWidget(self.rgb_checkbox)
-        self.layout().addWidget(self.btn)
+        self.setLayout(QGridLayout(self))
+        self.layout().addWidget(QLabel("Camera"), 0, 0)
+        self.layout().addWidget(self.camera_index_spinner, 0, 1)
+        self.layout().addWidget(QLabel("RGB"), 1, 0)
+        self.layout().addWidget(self.rgb_checkbox, 1, 1)
+        self.layout().addWidget(self.btn, 2, 1)
+        #self.layout().addStretch()
 
         self.image_layer = None
         self.camera_device = None
