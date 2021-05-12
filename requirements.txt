@@ -2,6 +2,5 @@ napari-plugin-engine>=0.1.4
 numpy
 opencv-python
 napari
-napari-plugin-engine>=0.1.4
 scikit-image
 pyqt5
