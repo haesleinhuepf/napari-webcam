@@ -70,9 +70,10 @@ class ContinuousAcquisition(QWidget):
 
             @thread_worker
             def yield_acquire_images_forever():
-                while self.viewer.window.qt_viewer:  # loop until napari closes
-                    if self.camera_device:
+                while True:
+                    if self.camera_device and self.rgb_checkbox:
                         yield {'image' + str(self.acquisition_count): acquire(keep_connection=True, device=self.camera_device, rgb=self.rgb_checkbox.isChecked())}
+                    print("acuqire", time.time())
                     time.sleep(0.05)
 
             # Start the imaging loop
