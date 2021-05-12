@@ -57,11 +57,4 @@ def acquire_image(camera_index: int = 0, rgb : bool = False) -> LayerDataTuple:
 
     picture = acquire(camera_index=camera_index, rgb=rgb)
 
-    #if rgb:
-    #    from skimage.color import rgb2gray
-    #    picture = rgb2gray(picture)
-
-    print("HELLO WORLD")
-    print(picture.shape)
-
     return (picture, {"rgb":rgb})
