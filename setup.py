@@ -40,7 +40,7 @@ setup(
     python_requires='>=3.6',
     install_requires=requirements,
     #use_scm_version=use_scm,
-    version="0.1.17",
+    version="0.1.18",
     setup_requires=['setuptools_scm'],
     classifiers=[
         'Development Status :: 4 - Beta',

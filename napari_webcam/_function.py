@@ -3,7 +3,7 @@ import numpy as np
 from cv2.cv2 import VideoCapture
 from napari.types import ImageData, LayerDataTuple
 from napari_plugin_engine import napari_hook_implementation
-
+from napari_tools_menu import register_function
 
 def acquire(camera_index=0, keep_connection=False, rgb=False, device : VideoCapture = None):
     """
@@ -52,6 +52,7 @@ def acquire(camera_index=0, keep_connection=False, rgb=False, device : VideoCapt
 def napari_experimental_provide_function():
     return [acquire_image]
 
+@register_function(menu="Acquisition > Webcam snapshot")
 def acquire_image(camera_index: int = 0, rgb : bool = False) -> LayerDataTuple:
     """Acquire an image from a webcam"""
 

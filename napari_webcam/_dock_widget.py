@@ -14,7 +14,9 @@ from qtpy.QtWidgets import QWidget, QHBoxLayout, QPushButton, QLineEdit, QSpinBo
 from magicgui import magic_factory
 import cv2
 from ._function import acquire
+from napari_tools_menu import register_dock_widget
 
+@register_dock_widget(menu="Acquisition > Webcam stream")
 class ContinuousAcquisition(QWidget):
     def __init__(self, napari_viewer):
         super().__init__()

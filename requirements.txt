@@ -4,3 +4,4 @@ opencv-python
 napari
 scikit-image
 pyqt5
+napari-tools-menu
