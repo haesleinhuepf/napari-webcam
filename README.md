@@ -1,9 +1,9 @@
----
+----------------------------------
 
 **This napari plugin has been decommissioned; it is no longer maintained. Please try [napari-live-recording](https://github.com/jacopoabramo/napari-live-recording) instead. 
 It has a more user-friendly interface and advanced features.**
 
----
+----------------------------------
 
 # napari-webcam
 
