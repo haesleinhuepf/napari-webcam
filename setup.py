@@ -45,7 +45,7 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'Framework :: napari',
+        #'Framework :: napari',
         'Topic :: Software Development :: Testing',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
@@ -55,9 +55,9 @@ setup(
         'Operating System :: OS Independent',
         'License :: OSI Approved :: BSD License',
     ],
-    entry_points={
-        'napari.plugin': [
-            'napari_webcam = napari_webcam',
-        ],
-    },
+    #entry_points={
+    #    'napari.plugin': [
+    #        'napari_webcam = napari_webcam',
+    #    ],
+    #},
 )
