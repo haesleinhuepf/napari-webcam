@@ -53,28 +53,32 @@ class ContinuousAcquisition(QWidget):
         else:
             # start imaging
             self.acquisition_count += 1
+            self.rgb = self.rgb_checkbox.isChecked()
             self.camera_device = cv2.VideoCapture(self.camera_index_spinner.value())
             self.btn.setText("Stop Acquisition")
 
             # Multi-threaded interaction
             # inspired by https://napari.org/docs/dev/events/threading.html
             def update_layer(data):
-                for name, image in data.items():
-                    if image is not None:
-                        try:
-                            # replace layer if it exists already
-                            self.viewer.layers[name].data = image
-                        except KeyError:
-                            # add layer if not
-                            self.viewer.add_image(
-                                image, name=name, blending='additive'
-                            )
+                if data is not None:
+                    for name, image in data.items():
+                        if image is not None:
+                            try:
+                                # replace layer if it exists already
+                                self.viewer.layers[name].data = image
+                            except KeyError:
+                                # add layer if not
+                                self.viewer.add_image(
+                                    image, name=name, blending='additive'
+                                )
 
             @thread_worker
             def yield_acquire_images_forever():
-                while self.viewer.window.qt_viewer:  # loop until napari closes
+                while True:
                     if self.camera_device:
-                        yield {'image' + str(self.acquisition_count): acquire(keep_connection=True, device=self.camera_device, rgb=self.rgb_checkbox.isChecked())}
+                        yield {'image' + str(self.acquisition_count): acquire(keep_connection=True, device=self.camera_device, rgb=self.rgb)}
+                    else:
+                        yield
                     time.sleep(0.05)
 
             # Start the imaging loop
